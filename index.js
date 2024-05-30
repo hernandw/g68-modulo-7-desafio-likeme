@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 3000;
 //Motor de Plantilla
 
 //Middlewares
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use('/', routes)
