@@ -1,5 +1,5 @@
 import path from "path";
-import { addPostQuery, mostrarPostsQuery, addLikeQuery } from "../models/queries.js";
+import { addPostQuery, mostrarPostsQuery, addLikeQuery, deletePostQuery } from "../models/queries.js";
 const __dirname = path.resolve();
 
 export const home = (req, res) => {
@@ -30,6 +30,16 @@ export const addLike = async (req, res) => {
   try {
     const { id } = req.query
     const result = await addLikeQuery(id);
+    res.send(result);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export const deletePost = async (req, res) => {
+  try {
+    const { id } = req.query
+    const result = await deletePostQuery(id);
     res.send(result);
   } catch (error) {
     console.log(error.message);

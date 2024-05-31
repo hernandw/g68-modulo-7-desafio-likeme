@@ -52,4 +52,19 @@ export const addLikeQuery = async (id) => {
   }
 }
 
-
+export const deletePostQuery = async( id ) => {
+  try {
+      const sql = {
+          text: "DELETE FROM posts WHERE id = $1 returning *",
+          values: [id]
+      }
+      const result = await pool.query(sql);
+      if(result.rowCount > 0){
+          return result.rows[0];
+      }else{
+          return new Error("No se pudo borrar el post");
+      }
+  } catch (error) {
+      console.log("Query Error Code: ", error.code, "Message: ", error.message);
+  }
+}
