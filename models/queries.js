@@ -16,3 +16,21 @@ export const addPostQuery = async (usuario, URL, descripcion) => {
     console.log(error.message);
   }
 };
+
+export const mostrarPostsQuery = async () =>{
+    try {
+        const sql = {
+            text: "SELECT * FROM posts"
+        };
+
+        const response = await pool.query(sql);
+        if(response.rowCount > 0){
+            return response.rows
+        }else{
+            return new Error("No hay posts")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
