@@ -34,3 +34,22 @@ export const mostrarPostsQuery = async () =>{
     }
 }
 
+export const addLikeQuery = async (id) => {
+  const query = {
+      text: `UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *;`,
+      values: [id]
+  }
+  try {
+      const result = await pool.query(query)
+      if (result.rowCount > 0) {
+          return result.rows[0]
+      } else {
+          return new Error('Error al dar like');
+      }
+  }
+  catch (error) {
+      console.log(error.message)
+  }
+}
+
+

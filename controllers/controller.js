@@ -1,5 +1,5 @@
 import path from "path";
-import { addPostQuery, mostrarPostsQuery } from "../models/queries.js";
+import { addPostQuery, mostrarPostsQuery, addLikeQuery } from "../models/queries.js";
 const __dirname = path.resolve();
 
 export const home = (req, res) => {
@@ -25,3 +25,13 @@ export const mostrarPosts = async (req, res) => {
     console.log(error.message);
   }
 };
+
+export const addLike = async (req, res) => {
+  try {
+    const { id } = req.query
+    const result = await addLikeQuery(id);
+    res.send(result);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
